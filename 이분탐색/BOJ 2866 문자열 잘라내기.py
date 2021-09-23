@@ -1,3 +1,5 @@
+# https://www.notion.so/BOJ-2866-2e0f9921224c40d8986e51d75291fb02
+
 row, column = map(int, input().split())
 arr = [ input() for _ in range(row)]
 
