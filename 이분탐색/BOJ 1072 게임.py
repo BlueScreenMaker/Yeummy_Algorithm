@@ -5,7 +5,7 @@ def getRate(num = 0) -> int:
 
 start: int = 1
 end: int = 1_000_000_000
-cnt: int = 0
+cnt: int = -1
 
 while start <= end:
     mid: int = (start + end) // 2
@@ -15,4 +15,4 @@ while start <= end:
     else:
         start = mid + 1
 
-print(cnt if cnt != 0 else -1)
+print(cnt)
