@@ -1,6 +1,6 @@
 num_game, num_win = map(int, input().split())
 
-def getRate(num = 0) -> int:
+def getRate(num: int = 0) -> int:
     return ((num_win + num) * 100) // (num_game + num)
 
 start: int = 1
