@@ -13,7 +13,6 @@ def solution(priorities: list, location: int):
         
         idx += 1
         
-    
     return print_list.index(target) + 1
 
 
