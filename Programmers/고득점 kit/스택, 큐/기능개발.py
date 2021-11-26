@@ -6,6 +6,8 @@ def solution(progresses: list, speeds: list) -> list:
     prev: int = work_day[0]
     count: int = 0
 
+    print(work_day)
+
     for i in work_day:
         if prev >= i:
             count += 1
@@ -16,7 +18,7 @@ def solution(progresses: list, speeds: list) -> list:
     answer.append(count)
     return answer
 
-progress: list = [99, 1, 99, 1]
-speeds: list = [1, 1, 1, 1]
+progress: list = [93, 30, 55]
+speeds: list = [1, 30, 5]
 
 print(solution(progress, speeds))
