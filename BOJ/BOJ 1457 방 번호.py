@@ -12,4 +12,3 @@ for i in room_num:
         arr[num] += 1
 
 print(max(arr))
-
