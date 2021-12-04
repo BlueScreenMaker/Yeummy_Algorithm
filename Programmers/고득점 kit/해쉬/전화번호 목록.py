@@ -1,13 +1,18 @@
-from itertools import combinations
 
 def solution(phone_book):
-    answer: bool = True
-    phone_book = sorted(phone_book)
+    answer = True
+    dic = {}
 
-    for i in combinations(phone_book, 2):
-        if i[0] in i[1] and i[1][0] == i[0][0]:
-            answer = False
-            break
+    for p in phone_book:
+        dic[p] = 1
+
+    for p in phone_book:
+        tmp = ""
+        for num in p:
+            tmp += num
+            if tmp in dic and tmp!=p:
+                answer = False
+                break
 
     return answer
 
