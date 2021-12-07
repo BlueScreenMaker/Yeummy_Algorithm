@@ -11,7 +11,7 @@ class Heap:
         # 만약, 인덱스가 루트일때
         if inerted_idx <= 1:
             return False
-
+    
         parent_idx = inerted_idx // 2
         if self.heap_array[inerted_idx] > self.heap_array[parent_idx]:
             return True
@@ -53,7 +53,7 @@ class Heap:
         while self.move_up(inserted_idx):
             # 부모 인덱스를 가져온다.
             parent_idx = inserted_idx // 2
-            # 스왑한다.
+            # 스왑한다. 
             self.heap_array[inserted_idx], self.heap_array[parent_idx] = self.heap_array[parent_idx], self.heap_array[inserted_idx]
             # 스왑한 인덱스를 바꾼다.
             inserted_idx = parent_idx
