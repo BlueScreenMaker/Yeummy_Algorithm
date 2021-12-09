@@ -7,7 +7,7 @@ def selection_sort(data):
         for j in range(i + 1, len(data)):
             if data[target] > data[j]:
                 target = j
-                
+
         if target != i:
             data[i], data[target] = data[target], data[i]
 
