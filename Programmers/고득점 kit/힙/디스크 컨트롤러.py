@@ -1,35 +1,40 @@
-import heapq
+# def solution(jobs) -> int:
+#     length: int = len(jobs)
+#     jobs_list = sorted(jobs, key=lambda schedule: schedule[1])
+    
+#     first_schedule: list = jobs_list.pop(0)
+#     current_time: int = first_schedule[0] + first_schedule[1]
+#     scheduling_time: int = first_schedule[1]
+    
+    
+#     while len(jobs_list):
+#         current_schedule: list = jobs_list.pop(0)
+#         delay_time: int = current_time - current_schedule[0]
+#         scheduling_time += delay_time + current_schedule[1]
+#         current_time += current_schedule[1]
+    
+#     return scheduling_time // length
 
-def solution(jobs):
-    job_list = [(v, i) for i, v in (jobs)]
-    heapq.heapify(job_list)
-    
-    schdule = heapq.heappop(job_list)
-    sum_time = schdule[0]
-    cur_time = schdule[0] + schdule[1]
-    
-    while len(job_list) != 0:
-        waiting_schdule = []
-        
-        for i in range(len(job_list)):
-            if cur_time > job_list[i][1]:
-                waiting_schdule.append(job_list.pop(i))
-                if i != 0:
-                    i -= 1
-            else:
-                break
+# temp = [[0, 3], [1, 9], [2, 6]]
 
-        while len(waiting_schdule) != 0:
-            schdule = heapq.heappop(waiting_schdule)
-            delay_time = cur_time - schdule[1]
-            cur_time += schdule[0]
-            sum_time += delay_time + schdule[0]
-            
-            
-    return sum_time // len(jobs)
+# print(solution(temp))
+
+def solution(jobs) -> int:
+    length: int = len(jobs)
+    jobs_list = sorted(jobs, key=lambda schedule: schedule[1])
     
+    current_time: int  = 0
+    scheduling_time: int  = 0
+    
+    
+    while len(jobs_list):
+        current_schedule: list = jobs_list.pop(0)
+        delay_time: int = current_time - current_schedule[0]
+        scheduling_time += delay_time + current_schedule[1]
+        current_time += current_schedule[1]
+    
+    return scheduling_time // length
 
 temp = [[0, 3], [1, 9], [2, 6]]
-
 
 print(solution(temp))
