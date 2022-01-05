@@ -2,8 +2,7 @@ num: int = int(input())
 
 memo: list = [0 for i in range(1000 + 1)]
 
-memo[1] = 1
-memo[2] = 2
+memo[1], memo[2] = 1, 2
 
 if num == 1 or num == 2:
     print(memo[num])
