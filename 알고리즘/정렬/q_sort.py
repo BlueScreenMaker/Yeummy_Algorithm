@@ -1,3 +1,5 @@
+import random
+
 def qsort(data):
     if len(data) <= 1:
         return data
@@ -11,4 +13,8 @@ def qsort(data):
         else:
             right.append(data[index])
     
-    return qsort(left) + [pivot] + qsort(right)
+    return qsort(right) + [pivot] + qsort(left)
+
+data_list = random.sample(range(100), 10)
+
+print(qsort(data_list))
