@@ -13,6 +13,8 @@ def binary_search_recur(data, target):
     elif data[mid] < target:
         binary_search(data[mid:], target)
         
+        
+        
 def binary_search(data, target):
     data.sort()
     
