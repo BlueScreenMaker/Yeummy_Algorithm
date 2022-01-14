@@ -1,6 +1,5 @@
 
 def solution(triangle):
-    answer: list = []
     length: int = len(triangle) - 1
     
     def recursion(x, y, cost):
