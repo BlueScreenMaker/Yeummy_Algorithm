@@ -1,15 +1,11 @@
-
 def solution(triangle):
-    length: int = len(triangle) - 1
-    
-    def recursion(x, y, cost):
-        
-        if length == x:
-            return cost + triangle[x][y]
-        
-        return max(recursion(x + 1, y, cost + triangle[x][y]), recursion(x + 1, y + 1, cost + triangle[x][y]))
-        
-    return recursion(0, 0, 0)
-
-triangle: list = [[7], [3, 8], [8, 1, 0], [2, 7, 4, 4], [4, 5, 2, 6, 5]]
-print(solution(triangle))
+    for i in range(1, len(triangle)):
+        for j in range(len(triangle[i])):
+            if j == 0:
+                triangle[i][j] += triangle[i - 1][j]
+            elif j == i:
+                triangle[i][j] += triangle[i - 1][j - 1]
+            else:
+                triangle[i][j] += max(triangle[i - 1][j], triangle[i - 1][j - 1])
+                
+    return max(triangle[-1])
