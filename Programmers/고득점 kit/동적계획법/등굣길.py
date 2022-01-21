@@ -10,7 +10,6 @@ def solution(m, n, puddles) -> int:
                 location[i][j] = location[i - 1][j] + location[i][j - 1]
         
     return location[n][m] % 1000000007
-            
 
 m = 4
 n = 3
