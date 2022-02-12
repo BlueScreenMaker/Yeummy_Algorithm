@@ -17,7 +17,7 @@ while (idx < N) {
         stack.push(currentValue);
         answer.push('+');
 
-        continue;
+        return;
     }
 
     // top과 넣을 입력된 값과 같을 때
@@ -26,7 +26,7 @@ while (idx < N) {
         answer.push('-');
         ++idx;
 
-        continue;
+        return;
     }
 
     // 위 조건 모두가 아니라면 No.
