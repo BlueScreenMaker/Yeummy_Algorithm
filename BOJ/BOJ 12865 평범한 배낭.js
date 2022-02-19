@@ -25,4 +25,4 @@ for (let i = 0; i <= N; i++) {
     }
 }
 
-console.log(dp[N][K])
+console.log(dp[N][K]);
