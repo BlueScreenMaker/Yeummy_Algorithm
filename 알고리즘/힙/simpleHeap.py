@@ -1,4 +1,4 @@
-
+# -*- coding: utf-8 -*-
 class Heap:
     def __init__(self, data):
         self.heap_array = list()
@@ -101,7 +101,4 @@ heap.insert(8)
 heap.insert(5)
 heap.insert(4)
 heap.insert(20)
-print(heap.heap_array)
-
-heap.pop()
 print(heap.heap_array)

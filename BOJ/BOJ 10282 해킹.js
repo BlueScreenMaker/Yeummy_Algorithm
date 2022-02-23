@@ -1,4 +1,4 @@
-const [num, ...rest] = require('fs').readFileSync(__dirname + '/dev/stdin').toString().trim().split('\n');
+const [num, ...rest] = require('fs').readFileSync(__dirname + '/example.txt').toString().trim().split('\n');
 let curIdx = 0;
 
 function dijkstra(start, graph, distance) {
@@ -42,7 +42,7 @@ for (let i = 0; i < Number(num); i++) {
     const result = dijkstra(startNode, graph, distance);
     let count = 0;
     let time = 0;
-
+    console.log(result);
     result.forEach((v) => {
       if (v !== Infinity) {
         count += 1;

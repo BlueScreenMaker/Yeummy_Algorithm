@@ -65,17 +65,13 @@ while (true) {
     }
 
     dijkstra(S, graph, distance);
+    bfs(D, graph, reversedGraph, distance);
+
+    distance = Array(N).fill(Infinity);
+    dijkstra(S, graph, distance);
 
     if (distance[D] === Infinity) console.log(-1);
-    else {
-        bfs(D, graph, reversedGraph, distance);
-
-        distance = Array(N).fill(Infinity);
-        dijkstra(S, graph, distance);
-
-        if (distance[D] === Infinity) console.log(-1);
-        else console.log(distance[D]);
-    }
+    else console.log(distance[D]);
     
     curIdx += M;
 }
