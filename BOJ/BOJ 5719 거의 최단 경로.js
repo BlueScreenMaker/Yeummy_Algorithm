@@ -1,47 +1,73 @@
 const [...data] = require('fs').readFileSync(__dirname + '/example.txt').toString().trim().split('\n');
 let curIdx = 0;
 
-function dijkstra(start, graph, distance) {
+function dijkstra(start, graph, distance, dropped) {
     const queue = [];
     queue.push([0, start]);
     distance[start] = 0;
 
     while (queue.length > 0) {
-        const [dist, now] = queue.shift();
+        const [dist, node] = queue.shift();
 
-        if (dist > distance[now]) continue;
+        if (dist > distance[node]) continue;
 
-        for (let i = 0, length = graph[now].length; i < length; i++) {
-            const [curDist, curNode] = graph[now][i];
-            const cost = dist + curDist;
+        if (!!graph.get(node)) {
+            
+            graph.get(node).forEach((n => {
+                const [curDist, curNode] = n;
+                const cost = dist + curDist;
 
-            if (curDist !== -1 && cost < distance[curNode]) {
-                distance[curNode] = cost;
+                if (!dropped[node][curNode] && cost < distance[curNode]) {
+                    distance[curNode] = cost;
 
-                queue.push([cost, curNode]);
-                queue.sort((a, b) => a[0] - b[0]);
-            }
+                    queue.push([cost, curNode]);
+                    queue.sort((a, b) => a[0] - b[0]);
+                }
+            }));
         }
     }
 }
 
-function bfs(end, graph, reversedGraph, distance) {
-    const [visit, needVisit] = [Array(graph.length).fill(false), [end]];
-
-    visit[end] = true;
+function bfs(start, end, reversedGraph, distance, dropped) {
+    const [visited, needVisit] = [Array(reversedGraph.size).fill(false), [end]];
 
     while (needVisit.length > 0) {
         const node = needVisit.shift();
-        for (let i = 0; i < reversedGraph[node].length; i++) {
-            const [curCost, curNode, length] = reversedGraph[node][i];
-            if (!visit[curNode] && distance[node] === distance[curNode] + curCost) {
-                visit[node] = true;
-                needVisit.push(curNode);
 
-                graph[curNode][length] = [-1, node];
-            }
+        if (node === start) continue;
+
+        if (!!reversedGraph.get(node) && !visited[node]) {
+
+            visited[node] = true;
+
+            reversedGraph.get(node).forEach(n => {
+                const [curDist, curNode] = n;
+
+                if (distance[node] === distance[curNode] + curDist) {
+                    dropped[curNode][node] = true;
+                    needVisit.push(curNode);
+                }
+            })
         }
     }
+}
+
+function setGraph(datas) {
+    const graph = new Map();
+    const reversedGraph = new Map();
+
+    datas.forEach((data) => {
+        const [U, V, P] = data.split(' ').map(Number);
+
+        if (!graph.get(U)) graph.set(U, []);
+
+        if (!reversedGraph.get(V)) reversedGraph.set(V, []);
+
+        graph.get(U).push([P, V]);
+        reversedGraph.get(V).push([P, U]);
+    });
+
+    return {graph, reversedGraph};
 }
 
 
@@ -50,25 +76,18 @@ while (true) {
     
     if (N === 0 && M === 0) break;
 
-    const graph = Array.from(Array(N), () => Array(0));
-    const reversedGraph = Array.from(Array(N), () => Array(0));
     let distance = Array(N).fill(Infinity);
     const [S, D] = data[curIdx + 1].split(' ').map(Number);
-
     curIdx += 2;
-   
-    for (let i = 0; i < M; i++) {
-        const [U, V, P] = data[curIdx + i].split(' ').map(Number);
-        const length = graph[U].length;
-        graph[U].push([P, V]);
-        reversedGraph[V].push([P, U, length]);
-    }
 
-    dijkstra(S, graph, distance);
-    bfs(D, graph, reversedGraph, distance);
+    const {graph, reversedGraph} = setGraph(data.slice(curIdx, (curIdx + M)));
+    const dropped = Array.from(Array(N), () => new Array(N).fill(false));
+
+    dijkstra(S, graph, distance, dropped);
+    bfs(S, D, reversedGraph, distance, dropped);
 
     distance = Array(N).fill(Infinity);
-    dijkstra(S, graph, distance);
+    dijkstra(S, graph, distance, dropped);
 
     if (distance[D] === Infinity) console.log(-1);
     else console.log(distance[D]);
