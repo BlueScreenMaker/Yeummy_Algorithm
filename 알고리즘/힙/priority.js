@@ -35,7 +35,7 @@ function PriorityQueue() {
             let added = false;
             for (let i = 0; i < collection.length; i++) {
                 // 들어온 요소와 기존의 collection 비교
-                if (element[1] < collection[i][1]) {
+                if (element < collection[i]) {
                     collection.splice(i, 0, element);
                     added = true;
                     break;
@@ -53,11 +53,13 @@ function PriorityQueue() {
 };
 
 const pq = new PriorityQueue();
-pq.enqueue(['Yeum', 30]);
-pq.enqueue(['Lee', 45]);
-pq.enqueue(['Kim', 10]);
-pq.enqueue(['Kim', 25]);
-pq.enqueue(['Kim', 9]);
+pq.enqueue(30);
+pq.enqueue(25);
+pq.enqueue(40);
+pq.enqueue(5);
+pq.enqueue(10);
+pq.enqueue(9);
+
 pq.print();
 pq.dequeue();
 pq.front();
