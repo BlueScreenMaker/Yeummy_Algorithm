@@ -1,4 +1,4 @@
-const N = Number(require('fs').readFileSync(__dirname + '/dev/stdin').toString().trim());
+const N = Number(require('fs').readFileSync(__dirname + '/example.txt').toString().trim());
 
 let answer = 0;
 
